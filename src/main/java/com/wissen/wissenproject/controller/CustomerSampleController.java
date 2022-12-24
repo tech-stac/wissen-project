@@ -2,21 +2,23 @@ package com.wissen.wissenproject.controller;
 
 import com.wissen.wissenproject.entity.sample.CustomerSample;
 import com.wissen.wissenproject.service.CustomerSampleService;
+import com.wissen.wissenproject.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/streams")
+@RequestMapping("wissen/streams")
 public class CustomerSampleController {
 
     @Autowired
     CustomerSampleService customerSampleService;
+
+    @Autowired
+    EmailService emailService;
 
 
     /**
@@ -28,6 +30,15 @@ public class CustomerSampleController {
     @GetMapping("/filters")
     public List<CustomerSample> getAllFirstNameStartsWithPLetter(){
     List<CustomerSample> customer = customerSampleService.getAllCutomers();
+    //emailService.sendEmail();
     return  customer.stream().filter(s-> s.getFirstName().startsWith("P")).toList();
     }
+
+    @GetMapping("/filters/name")
+    public List<CustomerSample> getAllFirstNameStartsWithS(){
+        List<CustomerSample> customer = customerSampleService.getAllCutomers();
+        //emailService.sendEmail();
+        return  customer.stream().filter(s-> s.getFirstName().startsWith("S")).toList();
+    }
+    
 }

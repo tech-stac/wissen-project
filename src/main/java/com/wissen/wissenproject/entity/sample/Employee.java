@@ -3,7 +3,6 @@ package com.wissen.wissenproject.entity.sample;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.util.Date;
 
 @Data
@@ -44,6 +43,19 @@ public class Employee {
     private String  fax;
     @Column(name = "email")
     private String  email;
+    @Column(name = "gender")
+    private String gender;
+    @Column(name = "age")
+    private Integer age;
+    @Column(name = "salary")
+    private Float salary;
+
+    // by Bidirectional One to Many Relationships
+
+    @ManyToOne
+    @JoinColumn(name ="department_id")
+    private Department dept;
+
 
 
 }
